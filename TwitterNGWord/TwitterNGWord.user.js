@@ -4,10 +4,8 @@
 // @namespace    https://github.com/tdnossan/UserScripts/
 // @homepage     https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
 // @homepageURL  https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
-// @downloadURL  https://github.com/tdnossan/UserScripts/raw/main/TwitterNGWord/TwitterNGWord.user.js
-// @updateURL    https://github.com/tdnossan/UserScripts/raw/main/TwitterNGWord/TwitterNGWord.user.js
 // @author       tdnossan
-// @version      0.0.1
+// @version      0.0.2
 // @match        https://twitter.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitter.com
 // @grant        none
@@ -22,21 +20,23 @@
 'use strict';
 
 const ngword = /\#hashtag|@hoge|shindanmaker.com/;
-const test = false; // trueにするとNGワードを含んだツイートの表示色を変更
+const TEST = true; // trueにするとNGワードを含んだツイートの表示色を変更
 
 const section_callback = (mutationsList, observer) => {
     mutationsList.forEach(mutation => {
         mutation.addedNodes.forEach((e) => {
-            let attr = e.getAttribute("data-testid");
-            let text = e.innerText;
-            let link = e.querySelector('a[role="link"]'); // ～～がリポストしましたでID取れないのでリンクから取る
-            if(attr == 'cellInnerDiv' && (text.match(ngword) || (link && link.href.match(ngword)))) {
-                if(test) {
-                    e.style.background = "#ffddff";
-                    console.log(e.innerText);
-                }
-                else {
-                    e.style.display = "none";
+            if(e.tagName == "DIV") {
+                let tweet = e.getAttribute("data-testid") == 'cellInnerDiv';
+                let text = e.innerText;
+                let link = e.querySelector('a[role="link"]'); // ～～がリポストしましたでID取れないのでリンクから取る
+                if(tweet && (text.match(NGWord) || (link && link.href.match(NGWord)))) {
+                    if(TEST) {
+                        e.style.background = "#ffddff";
+                        console.log(e.innerText);
+                    }
+                    else {
+                        e.style.display = "none";
+                    }
                 }
             }
         });
@@ -50,7 +50,10 @@ async function waitQuerySelector(selector, node=document) {
             setTimeout(() => resolve(node.querySelector(selector), 100))
         );
     }
-    //console.log(obj);
+    if(TEST) {
+        console.log(selector);
+        console.log(obj);
+    }
     const observer = new MutationObserver(section_callback);
     observer.observe(obj, {
         childList: true, subtree: true
