@@ -33,6 +33,7 @@ const section_callback = (mutationsList, observer) => {
             if(attr == 'cellInnerDiv' && (text.match(ngword) || (link && link.href.match(ngword)))) {
                 if(test) {
                     e.style.background = "#ffddff";
+                    console.log(e.innerText);
                 }
                 else {
                     e.style.display = "none";
@@ -56,4 +57,5 @@ async function waitQuerySelector(selector, node=document) {
     })
 }
 
-waitQuerySelector('div[aria-label="ホームタイムライン"]');
+//waitQuerySelector('div[aria-label="ホームタイムライン"]');
+waitQuerySelector('main');
