@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Twitter NG Word
 // @description  ホーム・リスト関わらずNGワードを含むツイートを非表示にします
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/tdnossan/UserScripts/blob/main/TwitterNGWord/TwitterNGWord.js
 // @author       tdnossan
 // @version      0.0.1
 // @match        https://twitter.com/*
