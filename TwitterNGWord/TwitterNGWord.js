@@ -8,7 +8,8 @@
 // @updateURL    https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.js
 // @author       tdnossan
 // @version      0.0.1
-// @match        https://twitter.com/*
+// @match        https://twitter.com/home
+// @match        https://twitter.com/i/lists*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitter.com
 // @grant        none
 // ==/UserScript==
