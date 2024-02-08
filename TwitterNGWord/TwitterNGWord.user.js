@@ -1,10 +1,35 @@
+// ==UserScript==
+// @name         Twitter NG Word
+// @description  ホーム・リスト関わらずNGワードを含むツイートを非表示にします
+// @namespace    https://github.com/tdnossan/UserScripts/
+// @homepage     https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
+// @homepageURL  https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
+// @downloadURL  https://github.com/tdnossan/UserScripts/raw/main/TwitterNGWord/TwitterNGWord.user.js
+// @updateURL    https://github.com/tdnossan/UserScripts/raw/main/TwitterNGWord/TwitterNGWord.user.js
+// @author       tdnossan
+// @version      0.0.1
+// @match        https://twitter.com/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=twitter.com
+// @grant        none
+// @run-at       document-start
+// ==/UserScript==
+
+// ユーザーのプロフィールページでNG動作されると困る場合は@match部分を以下の3行に置き換えてください
+// @match        https://twitter.com/home
+// @match        https://twitter.com/i/lists*
+// @match        https://twitter.com/search*
+
+'use strict';
+
+const ngword = /\#hashtag|@hoge|shindanmaker.com/;
+const test = false; // trueにするとNGワードを含んだツイートの表示色を変更
 
 const section_callback = (mutationsList, observer) => {
     mutationsList.forEach(mutation => {
         mutation.addedNodes.forEach((e) => {
             let attr = e.getAttribute("data-testid");
             let text = e.innerText;
-            let link = e.querySelector('a[role="link"]');
+            let link = e.querySelector('a[role="link"]'); // ～～がリポストしましたでID取れないのでリンクから取る
             if(attr == 'cellInnerDiv' && (text.match(ngword) || (link && link.href.match(ngword)))) {
                 if(test) {
                     e.style.background = "#ffddff";
