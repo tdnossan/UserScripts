@@ -19,8 +19,6 @@ const test = true; // trueにすると非表示にしたツイートのテキス
 (function() {
     'use strict';
 
-    const timeline = document.querySelector('div[aria-label="ホームタイムライン"]');
-
     const sectioncallback = (mutationsList, observer) => {
         mutationsList.forEach(mutation => {
             mutation.addedNodes.forEach((e) => {
@@ -34,24 +32,19 @@ const test = true; // trueにすると非表示にしたツイートのテキス
         });
     };
 
-    // sectionタグが生成されるまで待機
-    const tlcallback = (mutationsList, observer) => {
-        mutationsList.forEach(mutation => {
-            mutation.addedNodes.forEach((e) => {
-                if(e.tagName == "SECTION") {
-                    observer.disconnect();
-                    const section = new MutationObserver(sectioncallback);
-                    section.observe(timeline, {
-                        childList: true, subtree: true
-                    })
-                }
-            });
-        });
-    };
+    async function waitQuerySelector(selector, node=document) {
+        let obj = null;
+        while(!obj) {
+            obj = await new Promise(resolve =>
+                setTimeout(() => resolve(node.querySelector(selector), 100))
+            );
+        }
+        console.log(obj);
+        const observer = new MutationObserver(sectioncallback);
+        observer.observe(obj, {
+            childList: true, subtree: true
+        })
+    }
 
-    const hometl = new MutationObserver(tlcallback);
-
-    hometl.observe(timeline, {
-        childList: true, subtree: true
-    })
+    waitQuerySelector('div[aria-label="ホームタイムライン"]');
 })();
