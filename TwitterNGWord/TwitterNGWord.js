@@ -18,38 +18,40 @@
 // @match        https://twitter.com/i/lists*
 // @match        https://twitter.com/search*
 
+'use strict';
+
 const ngword = /\#testhashtag|@hogehoge|shindanmaker\.com/;
 const test = true; // trueにすると非表示にしたツイートのテキスト内容をコンソールに表示
 
-(function() {
-    'use strict';
-
-    const sectioncallback = (mutationsList, observer) => {
-        mutationsList.forEach(mutation => {
-            mutation.addedNodes.forEach((e) => {
-                if(e.tagName == "DIV" && e.innerText && e.innerText.match(ngword)) {
-                    e.style.display = "none";
-                    if(test) {
-                        console.log(e.innerText);
-                    }
+const section_callback = (mutationsList, observer) => {
+    mutationsList.forEach(mutation => {
+        mutation.addedNodes.forEach((e) => {
+            let attr = e.getAttribute("data-testid");
+            let text = e.innerText;
+            if(attr == 'cellInnerDiv' && text.match(ngword)) {
+                if(test) {
+                    e.style.background = "#ffddff";
                 }
-            });
+                else {
+                    e.style.display = "none";
+                }
+            }
         });
-    };
+    });
+};
 
-    async function waitQuerySelector(selector, node=document) {
-        let obj = null;
-        while(!obj) {
-            obj = await new Promise(resolve =>
-                setTimeout(() => resolve(node.querySelector(selector), 100))
-            );
-        }
-        console.log(obj);
-        const observer = new MutationObserver(sectioncallback);
-        observer.observe(obj, {
-            childList: true, subtree: true
-        })
+async function waitQuerySelector(selector, node=document) {
+    let obj = null;
+    while(!obj) {
+        obj = await new Promise(resolve =>
+            setTimeout(() => resolve(node.querySelector(selector), 100))
+        );
     }
+    console.log(obj);
+    const observer = new MutationObserver(section_callback);
+    observer.observe(obj, {
+        childList: true, subtree: true
+    })
+}
 
-    waitQuerySelector('div[aria-label="ホームタイムライン"]');
-})();
+waitQuerySelector('div[aria-label="ホームタイムライン"]');
