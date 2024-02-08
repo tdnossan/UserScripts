@@ -8,11 +8,15 @@
 // @updateURL    https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.js
 // @author       tdnossan
 // @version      0.0.1
-// @match        https://twitter.com/home
-// @match        https://twitter.com/i/lists*
+// @match        https://twitter.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitter.com
 // @grant        none
 // ==/UserScript==
+
+// ユーザーのプロフィールページでNG動作されると困る場合は@match部分を以下の3行に置き換えてください
+// @match        https://twitter.com/home
+// @match        https://twitter.com/i/lists*
+// @match        https://twitter.com/search*
 
 const ngword = /\#testhashtag|@hogehoge|shindanmaker\.com/;
 const test = true; // trueにすると非表示にしたツイートのテキスト内容をコンソールに表示
