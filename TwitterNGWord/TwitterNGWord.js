@@ -1,7 +1,11 @@
 // ==UserScript==
 // @name         Twitter NG Word
 // @description  ホーム・リスト関わらずNGワードを含むツイートを非表示にします
-// @namespace    https://github.com/tdnossan/UserScripts/blob/main/TwitterNGWord/TwitterNGWord.js
+// @namespace    https://github.com/tdnossan/UserScripts/
+// @homepage     https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
+// @homepageURL  https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
+// @downloadURL  https://github.com/tdnossan/UserScripts/raw/master/TwitterNGWord/TwitterNGWord.user.js
+// @updateURL    https://github.com/tdnossan/UserScripts/raw/master/TwitterNGWord/TwitterNGWord.user.js
 // @author       tdnossan
 // @version      0.0.1
 // @match        https://twitter.com/*
