@@ -19,7 +19,7 @@
 
 'use strict';
 
-const ngword = /\#hashtag|@hoge|shindanmaker.com/;
+const NGWord = /\#hashtag|@hoge|shindanmaker.com/;
 const TEST = true; // trueにするとNGワードを含んだツイートの表示色を変更
 
 const section_callback = (mutationsList, observer) => {
