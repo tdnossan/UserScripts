@@ -4,8 +4,8 @@
 // @namespace    https://github.com/tdnossan/UserScripts/
 // @homepage     https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
 // @homepageURL  https://github.com/tdnossan/UserScripts/tree/master/TwitterNGWord
-// @downloadURL  https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.js
-// @updateURL    https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.js
+// @downloadURL  https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.user.js
+// @updateURL    https://raw.githubusercontent.com/tdnossan/UserScripts/main/TwitterNGWord/TwitterNGWord.user.js
 // @author       tdnossan
 // @version      0.0.1
 // @match        https://twitter.com/*
